@@ -18,7 +18,7 @@ app.use(require("./routes/index"));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
-// app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/tickets", require("./routes/ticketsRoutes"));
 // app.use("/api/messages", require("./routes/messageRoutes"));
 // app.use("/api/conversations", require("./routes/conversationRoutes"));
 

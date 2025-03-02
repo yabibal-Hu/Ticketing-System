@@ -30,21 +30,40 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+    // Find the user in the database
     const user = await User.findOne({ username });
-    console.log("user", user);
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }
+
+    // Validate the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid password" });
     }
-    const token = jwt.sign({ _id: user._id, role: user.role, username }, JWT_SECRET, { expiresIn: "1h" });
-    res.json({ 
-      message: "Login successful", token });
+
+    // Generate a JWT token
+    const token = jwt.sign(
+      { _id: user._id, role: user.role, username },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    // Send the response with token and user details
+    res.json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+      },
+    });
   } catch (error) {
+    console.error("Login error:", error);
     res.status(500).json({ message: "Server error", error });
   }
-}
+};
 
 module.exports = { signup, login };
