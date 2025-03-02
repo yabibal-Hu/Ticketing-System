@@ -13,6 +13,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ const Login: React.FC = () => {
       navigate(user.role === "admin" ? "/admin" : "/dashboard");
     } catch (error) {
       console.error("Login failed", error);
+      setError("Invalid username or password");
     }
   };
 
@@ -68,7 +70,7 @@ const Login: React.FC = () => {
               type="text"
               placeholder="Enter your username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {setUsername(e.target.value); setError("")}}
               className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
@@ -81,11 +83,12 @@ const Login: React.FC = () => {
               type="password"
               placeholder="Enter your password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {setPassword(e.target.value); setError("")}}
               className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
           </div>
+          {error && <p className="text-red-500">{error}</p>}
           <motion.button
             whileHover={{ scale: 1.05 }} // Scale up on hover
             whileTap={{ scale: 0.95 }} // Scale down on click
