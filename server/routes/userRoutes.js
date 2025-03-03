@@ -1,7 +1,3 @@
-// import express from "express";
-// import { getUsers, updateOnlineStatus } from "../controllers/userController";
-// import { protect } from "../middleware/authMiddleware";
-
 const express = require("express");
 const { getUsers, updateOnlineStatus, getUserById } = require("../controllers/userController");
 const { protect } = require("../middleware/authMiddleware");
