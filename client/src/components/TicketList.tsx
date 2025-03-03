@@ -77,7 +77,7 @@ const TicketList: React.FC<{ isAdmin?: boolean }> = ({ isAdmin = false }) => {
               <h3 className="text-xl font-bold text-purple-600">
                 <span className="text-gray-600">Title:</span> {ticket.title}
               </h3>
-              <p className="text-gray-700 mt-2">{ticket.description}</p>
+              <p className="text-gray-700 mt-2"><span className="font-medium">Description:</span> {ticket.description}</p>
             </div>
 
             {/* Ticket Metadata */}
@@ -97,10 +97,12 @@ const TicketList: React.FC<{ isAdmin?: boolean }> = ({ isAdmin = false }) => {
                     {ticket.status}
                   </span>
                 </p>
+                {user?.username !== ticket.createdBy.username && (
                 <p className="text-sm text-gray-500">
                   <span className="font-medium">Created by:</span>{" "}
                   {ticket.createdBy.username}
                 </p>
+                )}
               </div>
 
               {/* Admin Dropdown */}

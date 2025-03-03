@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 text-white shadow-lg"
+      className="bg-gradient-to-r sticky top-0 from-purple-600 to-blue-600 p-4 text-white shadow-lg"
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold hover:text-gray-200">

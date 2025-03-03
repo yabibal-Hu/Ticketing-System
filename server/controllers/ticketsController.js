@@ -1,5 +1,5 @@
 const Ticket = require("../models/Ticket");
-const User = require("../models/User");
+// const User = require("../models/User");
 
 const getAllTickets = async (req, res) => {
  try {
@@ -13,14 +13,24 @@ const getAllTickets = async (req, res) => {
 };
 
 const postTicket = async (req, res) => {
- try {
-  const { title, description } = req.body;
-  const ticket = new Ticket({ title, description, createdBy: req.user._id });
-  await ticket.save(); 
-  res.status(201).json({ message: "Ticket created", ticket });
- } catch (error) {
-  res.status(500).json({ message: "Server error" });
- }
+  try {
+    const { title, description } = req.body;
+    const ticket = new Ticket({ title, description, createdBy: req.user._id });
+    await ticket.save();
+
+    // Populate the createdBy field with user details
+    const populatedTicket = await Ticket.findById(ticket._id).populate(
+      "createdBy",
+      "username _id role" // Include only necessary fields
+    );
+
+    res
+      .status(201)
+      .json({ message: "Ticket created", ticket: populatedTicket });
+  } catch (error) {
+    console.error("Error creating ticket:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 const putTicketById = async (req, res) => {

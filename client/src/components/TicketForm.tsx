@@ -21,6 +21,7 @@ const TicketForm: React.FC = () => {
         { title, description },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      console.log("response", response.data);
       dispatch(addTicket(response.data.ticket));
       setTitle("");
       setDescription("");

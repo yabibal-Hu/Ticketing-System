@@ -8,8 +8,8 @@ const AdminDashboard: React.FC = () => {
     <div>
       <Navbar />
       <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-        <h2 className="text-xl font-bold mb-4">All Tickets</h2>
+        <h1 className="text-2xl font-bold mb-4 text-purple-600 text-center">Admin Dashboard</h1>
+        <h2 className="text-xl font-bold mb-4 text-purple-900 ">All Tickets</h2>
         <TicketList isAdmin />
       </div>
     </div>
