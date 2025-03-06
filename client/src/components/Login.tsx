@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"; // Import jwt-decode
 import { User } from "../types";
 import { motion } from "framer-motion"; // Import Framer Motion
-import { div } from "framer-motion/client";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
